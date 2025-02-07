@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { execFile } = require('child_process');
+const port = process.env.PORT || 5000;
+
 
 const app = express();
 app.use(cors()); // Allow requests from Next.js frontend
@@ -31,8 +33,7 @@ app.post('/api/submit', (req, res) => {
 
 app.get('/api/submit', (req, res) => {
     const formData = req.body;
-    const scriptPath = './script.py'; 
-    const pythonPath = "python";
+    
     p={"prediction" : "0.996" }
 
     return res.status(200).json({ output: "p" });  // Respond with the output of the script
@@ -53,4 +54,6 @@ app.get('/', (req, res) => {
 });
 
 
-app.listen(5000, () => console.log('Backend running on port 5000'));
+app.listen(port, () => 
+    console.log(`Backend running on port ${port}`)
+);
